@@ -1,4 +1,4 @@
-# cn-ip-list
+# apnic-cn-list
 
 Fetch CN mainland IP CIDR blocks from [APNIC](https://ftp.apnic.net/stats/apnic/delegated-apnic-latest) for policy routing.
 
