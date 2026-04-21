@@ -4,6 +4,7 @@ Fetch CN mainland IP CIDR blocks from APNIC for policy routing.
 """
 
 import math
+import ipaddress
 import requests
 
 APNIC_URL = "https://ftp.apnic.net/stats/apnic/delegated-apnic-latest"
@@ -46,7 +47,16 @@ def parse_cn_ip(lines):
             # value = prefix length
             ipv6_list.append(f"{start}/{value}")
 
+    ipv4_list = collapse_cidrs(ipv4_list)
+    ipv6_list = collapse_cidrs(ipv6_list)
+
     return ipv4_list, ipv6_list
+
+
+def collapse_cidrs(cidr_list):
+    """Collapse CIDRs by removing covered subnets and merging adjacent ranges."""
+    networks = [ipaddress.ip_network(cidr, strict=False) for cidr in cidr_list]
+    return [str(net) for net in ipaddress.collapse_addresses(networks)]
 
 
 def write_list(filename, ip_list):
