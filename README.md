@@ -6,6 +6,14 @@ Fetch CN mainland IP CIDR blocks from [APNIC](https://ftp.apnic.net/stats/apnic/
 
 - APNIC: https://ftp.apnic.net/stats/apnic/delegated-apnic-latest
 
+## Custom CN CIDR Merge
+
+If you have CIDRs that are confirmed CN but not marked as `CN` in APNIC, add them to `CUSTOM_CN_CIDRS` in `generate.py`.
+
+- Supports IPv4 and IPv6 CIDR strings
+- The script merges custom CIDRs with APNIC CN results
+- Final output is collapsed to remove overlaps and adjacent ranges
+
 ## Files
 
 | File | Description |
